@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Profile;
 import java.util.Arrays;
 
 @Configuration
-@Profile("test")
+@Profile("test") // Essa classe só roda quando o perfil ativo for "test"
 public class TestConfig implements CommandLineRunner {
+
+    // CommandLineRunner: executa esse código automaticamente quando a aplicação iniciar
 
     @Autowired
     private UserRepository userRepository;
