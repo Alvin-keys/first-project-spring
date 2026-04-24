@@ -11,11 +11,13 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
+    @Autowired // não usamos 'new', é o Spring que injeta
+    private UserRepository repository; // o Userservice utiliza a UserRepository
+
+    // chamará metodos do repository
 
     public List<User> findAll(){
-        return repository.findAll();
+        return repository.findAll(); // metodo herdado de JpaRepository
     }
 
     public User findById(Long id){

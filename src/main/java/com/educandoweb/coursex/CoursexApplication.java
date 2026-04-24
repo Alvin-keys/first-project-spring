@@ -11,3 +11,20 @@ public class CoursexApplication {
 	}
 
 }
+/*
+Controller → recebe requisição
+Service → processa
+Repository → acessa banco
+Spring → cria e conecta tudo automaticamente
+Resposta → JSON
+*/
+
+/*
+Quando acessa /users/2, o Spring chama o UserResource.
+O metodo findById é executado e recebe o ID via @PathVariable.
+O controller chama o UserService.
+O UserService usa o UserRepository, que foi injetado pelo Spring.
+O UserRepository busca os dados no banco usando JPA/Hibernate.
+O objeto User é retornado até o controller.
+O Spring converte esse objeto para JSON e envia na resposta HTTP.
+*/
