@@ -21,7 +21,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    @JsonIgnore // evita loop lá no postman
+    @JsonIgnore // evita loop infinito lá no postman
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
