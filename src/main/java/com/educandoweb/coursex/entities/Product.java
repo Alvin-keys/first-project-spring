@@ -1,6 +1,8 @@
 package com.educandoweb.coursex.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,7 +22,11 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany @Fetch(FetchMode.JOIN) // Solução temporária('@Fetch') para erro500 no Postman: pode dar problema depois!!
+    @JoinTable( name = "tb_product_category", // nome da tabela intermediária
+                joinColumns = @JoinColumn(name = "product_id"), // coluna que representa esse lado (Product)
+                inverseJoinColumns = @JoinColumn(name = "category_id") // coluna que representa o outro lado(Category)
+    )
     private Set<Category> categories = new HashSet<>();
 
     public Product(){
