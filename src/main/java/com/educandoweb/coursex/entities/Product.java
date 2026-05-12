@@ -1,5 +1,6 @@
 package com.educandoweb.coursex.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -28,6 +29,9 @@ public class Product implements Serializable {
                 inverseJoinColumns = @JoinColumn(name = "category_id") // coluna que representa o outro lado(Category)
     )
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product") @Fetch(FetchMode.JOIN)
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product(){
 
@@ -83,6 +87,15 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders(){
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
